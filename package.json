@@ -1,0 +1,23 @@
+{
+  "name": "sugarcrm-node",
+  "version": "0.0.0",
+  "private": true,
+  "description": "sugarCRM and NodeJs Server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "gsitoula",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.7.1",
+    "ejs": "^2.4.2",
+    "express": "^4.14.0",
+    "express-session": "^1.13.0",
+    "helmet": "^2.1.1",
+    "jsugar": "^0.1.2",
+    "morgan": "^1.7.0"
+  }
+}
