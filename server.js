@@ -44,6 +44,31 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 var url = "http://localhost/SugarCE-Full-6.5.23/service/v4_1/rest.php";
 
+/*
+    --SugarCRM wrappeado en NodeJs--
+
+    NodeJs realizara el trabajo de mediador entre
+    nuestra vista (la pagina web) y SugarCRM. Para esto
+    utilizamos el modulo jsugar y sus funciones jsugar.call
+    que utilizar los Methods Calls como parametro principal
+    para realizar la tarea deseada.
+    Para este caso estamos usando la versión 6.5.23 de SugarCRM,
+    también conocida como Community Edition.
+*/
+
+
+/* 
+    Comenzamos con el login necesario para que 
+    SugarCRM nos deje realizar las tareas deseadas.
+    Usando Express pegamos a una URL llamada login y
+    pedimos los datos necesarios al usuario para
+    loguearnos. El id de la sesión nos lo da Sugar y
+    sera necesario para realizar todas las llamadas
+    de metodos que desemos realizar, este mismo sera
+    guardado como una propiedad de nuestro express-session
+    object para luego poder utilizarla mas adelante.
+*/
+
 app.post('/login', function(req, res) {
     var username = req.body.username;
     var password = req.body.pass;
@@ -64,6 +89,49 @@ app.post('/login', function(req, res) {
       }
     });
 });
+
+/*
+    A partir de este punto estaremos realizando cada una de las
+    Method Calls que SugarCRM nos brinda. El orden es el mismo
+    que podemos observar en la documentación del CRM elegido.
+*/
+
+
+app.get('/modulesAvailable', function(req, res) {
+    /*
+        este es nuestro primer SugarCRM Method Call.
+        Observen como utilizando express-session conseguimos
+        el id que Sugar nos dio en el momento de hacer login  
+    */
+    var sess = req.session.user;
+
+        var params = {
+          session: sess.key,
+          filter: 'default',
+        }; 
+    
+    jsugar.call(url, 'get_available_modules', params, function(error, response) {
+
+        var data = response.data;
+        res.status(200).json(data);
+    });
+});
+
+// --------------------------------------------
+app.get('/documentRevision', function(req, res) {});
+
+// --------------------------------------------
+app.get('/entries', function(req, res) {});
+
+// --------------------------------------------
+app.get('/entriesCount', function(req, res) {});
+
+// --------------------------------------------
+app.get('/documentRevision', function(req, res) {});
+
+// --------------------------------------------
+app.get('/entry', function(req, res) {});
+
 
 app.get('/entryList', function(req, res) {
     
@@ -86,33 +154,16 @@ app.get('/entryList', function(req, res) {
         var data = response.data;
         res.status(200).json(data);
     });
-    
-    
-    //     if(password !== "admin") 
-    //   {
-    //     res.status(501).send({err: 1, descripción: "usuario y/o password incorrecto"});
-    //   }
-    //     else 
-    //   {
-    //   }
-
 });
 
-app.get('/modules', function(req, res) {
+// --------------------------------------------
+app.get('/language', function(req, res) {});
 
-    var sess = req.session.user;
+// --------------------------------------------
+app.get('/lastViewed', function(req, res) {});
 
-        var params = {
-          session: sess.key,
-          filter: 'default',
-        }; 
-    
-    jsugar.call(url, 'get_available_modules', params, function(error, response) {
-
-        var data = response.data;
-        res.status(200).json(data);
-    });
-});
+// --------------------------------------------
+app.get('/modifiedRel', function(req, res) {});
 
 app.get('/modulesFields', function(req, res) {
 
@@ -130,6 +181,10 @@ app.get('/modulesFields', function(req, res) {
         res.status(200).json(data);
     });
 });
+
+// --------------------------------------------
+app.get('/modulesFieldsMd5', function(req, res) {});
+
 
 app.get('/modulesLayout', function(req, res) {
 
@@ -149,9 +204,67 @@ app.get('/modulesLayout', function(req, res) {
         var data = response.data;
         res.status(200).json(data);
     });
-});    
+});
 
-app.post('/setAccount', function(req, res) {
+// --------------------------------------------
+app.get('/modulesLayoutMd5', function(req, res) {});    
+
+// --------------------------------------------
+app.get('/noteAttachment', function(req, res) {});
+
+// --------------------------------------------
+app.get('/quotesPDF', function(req, res) {});
+
+// --------------------------------------------
+app.get('/relationships', function(req, res) {});
+
+// --------------------------------------------
+app.get('/reportEntries', function(req, res) {});
+
+// --------------------------------------------
+app.get('/reportPDF', function(req, res) {});
+
+// --------------------------------------------
+app.get('/serverInfo', function(req, res) {});
+
+// --------------------------------------------
+app.get('/upcomingActivities', function(req, res) {});
+
+// --------------------------------------------
+app.get('/userId', function(req, res) {});
+
+// --------------------------------------------
+app.get('/teamId', function(req, res) {});
+
+// --------------------------------------------
+app.get('/queueCycle', function(req, res) {});
+
+// --------------------------------------------
+app.get('/queueNext', function(req, res) {});
+
+// --------------------------------------------
+app.get('/queueRun', function(req, res) {});
+
+// --------------------------------------------
+app.get('/oauthAccess', function(req, res) {});
+
+// --------------------------------------------
+app.get('/seamlessLogin', function(req, res) {});
+
+// --------------------------------------------
+app.get('/searchByModule', function(req, res) {});
+
+// --------------------------------------------
+app.get('/campaignMerge', function(req, res) {});
+
+// --------------------------------------------
+app.get('/documentRevision', function(req, res) {});
+
+// --------------------------------------------
+app.post('/setEntries', function(req, res) {});
+
+
+app.post('/setEntry', function(req, res) {
   
     var sess = req.session.user;
     
@@ -168,6 +281,21 @@ app.post('/setAccount', function(req, res) {
     });    
 
 });
+
+// --------------------------------------------
+app.post('/setNote', function(req, res) {});
+
+// --------------------------------------------
+app.post('/setRelationship', function(req, res) {});
+
+// --------------------------------------------
+app.post('/setRelationships', function(req, res) {});
+
+// --------------------------------------------
+app.post('/snipImportEmails', function(req, res) {});
+
+// --------------------------------------------
+app.post('/snipUpdateContacts', function(req, res) {});
 
     
 app.listen(port, function() {
