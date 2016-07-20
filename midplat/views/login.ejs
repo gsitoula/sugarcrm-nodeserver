@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <script src="/slim/client/bower_components/angular/angular.js"></script>
+    </head>
+    <body ng-app= "myapp">
+
+        <div>
+          <form ng-submit="submit()" ng-controller="myLogin">
+             <p>Username <input type="text" ng-model="userName" value="Username"></p>
+             <p>Password <input type="password" ng-model="userPass" value="Password"></p>
+             <input type="submit" value="Submit">
+          </form>
+          
+        </div>
+        
+        <script src="scripts/login.js"></script>
+   </body>
+</html>
