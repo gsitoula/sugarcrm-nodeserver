@@ -12,7 +12,7 @@
                 'form/elements', 'form/layouts', 'form/validation', 'form/wizard',
                 'chart/echarts', 'chart/echarts-line', 'chart/echarts-bar', 'chart/echarts-pie', 'chart/echarts-scatter', 'chart/echarts-more',
                 'page/404', 'page/500', 'page/blank', 'page/forgot-password', 'page/invoice', 'page/lock-screen', 'page/profile', 'page/invoice', 'page/signin', 'page/signup',
-                'app/tasks', 'app/calendar', 'settings/settings'
+                'app/tasks', 'app/calendar', 'settings/settings', 'logs/logs'
             ]
 
             setRoutes = function(route) {

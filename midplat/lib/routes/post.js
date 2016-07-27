@@ -1,10 +1,42 @@
 'use strict';
 
-var router = require('express').Router();
-var jsugar = require('jsugar');
-var session = require('express-session');
-var config = require('config');
-var crypto = require('crypto');
+var router   = require('express').Router();
+var jsugar   = require('jsugar');
+var session  = require('express-session');
+var config   = require('config');
+var crypto   = require('crypto');
+var jsonfile = require('jsonfile');
+var file     = 'config/config.json';
+
+router.post('/setConfig', function(req, res) {
+    
+    var obj = req.body;
+    var hash = crypto.createHash('md5').update(obj.password+Date.now()).digest("hex");
+    req.body.password = hash;   
+
+    console.log(obj);
+
+    jsonfile.writeFile(file, obj, function (err) {
+        if(!err) {
+            console.log("la configuración a sido guarada");
+        } else {
+            console.log(err);
+        }
+    });
+
+    res.status(200).send({err: 0, descripción: "la configuración a sido guarada"});
+
+    /*
+    jsonfile.readFile(file, function(err, obj) {
+        if(!err) {
+        res.status(200).send(JSON.stringify(obj));
+    } else {
+        console.log(err);
+    }   
+    });
+    */
+});
+
 
 
 // router.post('/setEntry', function(req, res) {

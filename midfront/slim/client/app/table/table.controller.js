@@ -10,8 +10,8 @@
     					return info;
     				});
     		}
-    	}])        
-        .controller('tableCtrl', ['$scope', '$filter', 'dataService', tableCtrl])
+    	}])   
+        .controller('tableCtrl', ['$scope', '$filter', /*'dataService',*/ tableCtrl])
         .controller('abmCtrl', ['$scope', 'dataService', abmCtrl]);
 
     function abmCtrl($scope, dataService) {
@@ -21,6 +21,7 @@
         $scope.accounts = [];
 
         init = function() {
+
             dataService.get().then(function(info) {
                 //info.entry_list.length
                 console.log(info.entry_list[0].name_value_list.name.value);
@@ -94,6 +95,7 @@
 
         init = function() {
 
+            
         	dataService.get().then(function(info) {
                 //info.entry_list.length
              for(var i = 0; i<= 19; ++i){
@@ -101,6 +103,7 @@
         	 }
         	 return $scope.stores;
         	 });
+            
 
             $scope.search();
             return $scope.select($scope.currentPage);

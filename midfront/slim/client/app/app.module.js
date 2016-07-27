@@ -24,7 +24,8 @@
         'app.page',
         'app.table',
         'app.task',
-        'app.settings'
+        'app.settings',
+        'app.logs'
     ]);
 
 })();

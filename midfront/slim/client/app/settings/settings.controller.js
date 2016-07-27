@@ -1,45 +1,59 @@
 (function () {
     'use strict';
 
-    angular.module('app.settings', ["ngAnimate"])
-    	.service('dataService', ['$http', function($http) {
-    		
-            this.get = function() {
-    			return $http.get("http://localhost:3003/entryList_page1")
-    				.then(function(response) {
-    					var info = response.data;
-    					return info;
-    				});
-    		};
-
-    	}])
-        .controller('abmCtrl', ['$scope', 'dataService', abmCtrl]);
+    angular.module('app.settings')
+    	.service('configSet', ['$http', function($http) {
+            this.post = function(info){
+                var require = {
+                    method: 'POST',
+                    url: 'http://127.0.0.1:3003/setConfig',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: info//{username: "admin", pass: "Sugaradm2016"}
+                    };
+                    $http(require)
+                        .success(function(data){
+                            console.log(data);
+                        })
+                        .error(function(data){
+                            console.log(data);
+                        });  
+                }
+        }])
+        .controller('confSet', ['$scope', 'configSet', confSet]);
         
-    function abmCtrl($scope, dataService) {
+    function confSet($scope, configSet) {
         
-        var init;
+        $scope.submit = function() {
 
-        $scope.accounts = [];
+            var info = {
+                username: $scope.userName, 
+                password: $scope.userPass,
+                hostId  : $scope.hostId,
+                database: $scope.dataBase
+            };
+            
+            configSet.post(info);
+       //  var require = {
+       //    method: 'POST',
+       //    url: 'http://127.0.0.1:3003/login',
+       //    headers: {
+       //        'Content-Type': 'application/json'
+       //    },
+       //    data: {username: $scope.userName, pass: $scope.userPass}
+         };
 
-        $scope.editAccount = function() {
-            prompt("Account Edition");
-        }
-
-        $scope.deleteAccount = function() {
-            prompt("Are you sure you want to delete this Account?");
-        }
-
-        init = function() {
-            dataService.get().then(function(info) {
-                //info.entry_list.length                
-                var inf = info.entry_list.reverse();
-             for(var i = 0; i <= 9; i++){
-                $scope.accounts.push(inf[i]); 
-             }
-             return $scope.accounts;
-             });
-        };        
-        init();
+       //  $http(require)
+       //   .success(function(data) {
+       //    if(data.errors) {
+       //      console.log(data.erros);
+       //    } else {
+       //      $scope.message = data.message;
+       //    }
+       //   });
     }
+      
+     
 
 })(); 
