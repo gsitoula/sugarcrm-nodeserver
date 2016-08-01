@@ -1,0 +1,36 @@
+
+<div class="page page-table">
+
+  <section class="panel panel-default table-dynamic">
+    <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> <strong data-translate="SETTINGS"></strong></div>
+
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+
+                    <form role="form" ng-controller="confSet" ng-submit="submit()">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Username</label>
+                            <input class="form-control" id="exampleInputEmail1" placeholder="Enter Username" ng-model="userName">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter User Password" ng-model="userPass">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Host</label>
+                            <input class="form-control" id="exampleInputPassword1" placeholder="Enter the Database Host" ng-model="hostId">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Base de Datos</label>
+                            <input class="form-control" id="exampleInputPassword1" placeholder="Enter the Database Name" ng-model="dataBase">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-w-md">Guardar</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+  </section>
+
+</div>
