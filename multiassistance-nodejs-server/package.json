@@ -1,0 +1,36 @@
+{
+  "name": "cardinal",
+  "version": "1.0.0",
+  "description": "demo Cardinal",
+  "main": "server.js",
+  "dependencies": {
+    "activedirectory": "^0.7.2",
+    "async": "^2.0.0-rc.5",
+    "body-parser": "^1.15.1",
+    "config": "^1.20.2",
+    "cors": "^2.7.1",
+    "crypto": "0.0.3",
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "helmet": "^2.0.0",
+    "http-proxy": "^1.14.0",
+    "jsonfile": "^2.3.1",
+    "jsugar": "^0.1.2",
+    "mongoose": "^4.5.8",
+    "morgan": "^1.7.0",
+    "request": "^2.72.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/aloffreda2/demoapisugar.git"
+  },
+  "homepage": "https://bitbucket.org/aloffreda2/demoapisugar#readme"
+}
